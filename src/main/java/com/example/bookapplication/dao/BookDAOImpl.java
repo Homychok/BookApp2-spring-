@@ -21,15 +21,13 @@ public class BookDAOImpl implements BookDAO {
         return new JdbcTemplate(dataSource);
     }
     @Override
-
     public void addBook(Book book) {
         template.update("INSERT INTO book VALUES (?, ?, ?, ?)",
-                book.getBookName(), book.getBookName(), book.getBookYear(), book.getIsbn());
+                book.getBookName(), book.getBookAuthor(), book.getBookYear(), book.getIsbn());
 //        Session session = sessionFactory.getCurrentSession();
 //        session.save(book);
     }
     @Override
-
     public void updateBook(Book book) {
         template.update("UPDATE book SET 'Название книги' = ?, 'Автор книги' = ?, " +
                         "'Год издания книги' = ? WHERE isbn = ?",
@@ -54,7 +52,6 @@ book.getBookName(), book.getBookAuthor(), book.getBookYear(), book.getIsbn());
 //        query.executeUpdate();
 //    }
     @Override
-
     public Book getBookByIsbn(String isbn) {
         return template.query("SELECT * FROM book WHERE isbn = ?",
                 new Object[] {isbn},
