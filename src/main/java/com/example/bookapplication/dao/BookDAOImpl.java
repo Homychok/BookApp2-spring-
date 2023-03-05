@@ -1,13 +1,10 @@
 package com.example.bookapplication.dao;
 
 import com.example.bookapplication.entity.Book;
-import com.example.bookapplication.service.BookRowService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import javax.sql.DataSource;
 import java.util.List;
 @Repository
 public class BookDAOImpl implements BookDAO {
@@ -16,10 +13,7 @@ public class BookDAOImpl implements BookDAO {
     public BookDAOImpl(@Lazy JdbcTemplate template) {
         this.template = template;
     }
-    @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
+
     @Override
     public void addBook(Book book) {
         template.update("INSERT INTO book VALUES (?, ?, ?, ?)",

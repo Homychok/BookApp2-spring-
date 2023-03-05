@@ -6,7 +6,6 @@ public class Book {
     private String isbn;
     private String bookName;
     private String bookAuthor;
-
     private Integer bookYear;
 
     public Book() {
