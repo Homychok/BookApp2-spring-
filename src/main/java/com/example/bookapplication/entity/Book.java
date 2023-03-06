@@ -1,10 +1,10 @@
 package com.example.bookapplication.entity;
 
-import java.util.Objects;
-
 public class Book {
+
     private String isbn;
     private String bookName;
+
     private String bookAuthor;
 
     private Integer bookYear;
@@ -72,27 +72,6 @@ public class Book {
         this.bookYear = bookYear;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book)) return false;
-        Book book = (Book) o;
-        return getIsbn() == book.getIsbn() && getBookYear() == book.getBookYear() && Objects.equals(getBookName(), book.getBookName()) && Objects.equals(getBookAuthor(), book.getBookAuthor());
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getIsbn(), getBookName(), getBookAuthor(), getBookYear());
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "isbn=" + isbn +
-                ", bookName='" + bookName + '\'' +
-                ", bookAuthor='" + bookAuthor + '\'' +
-                ", bookYear=" + bookYear +
-                '}';
-    }
 }
 

@@ -2,13 +2,10 @@ package com.example.bookapplication.dao;
 
 import com.example.bookapplication.entity.Book;
 import com.example.bookapplication.service.BookRowService;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import javax.sql.DataSource;
 import java.util.List;
 @Repository
 public class BookDAOImpl implements BookDAO {
@@ -17,23 +14,17 @@ public class BookDAOImpl implements BookDAO {
     public BookDAOImpl(@Lazy JdbcTemplate template) {
         this.template = template;
     }
-    @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
-    @Override
 
+    @Override
     public void addBook(Book book) {
         template.update("INSERT INTO book VALUES (?, ?, ?, ?)",
-                book.getBookName(), book.getBookName(), book.getBookYear(), book.getIsbn());
+                book.getBookName(), book.getBookAuthor(), book.getBookYear(), book.getIsbn());
 //        Session session = sessionFactory.getCurrentSession();
 //        session.save(book);
     }
     @Override
-
     public void updateBook(Book book) {
-        template.update("UPDATE book SET 'Название книги' = ?, 'Автор книги' = ?, " +
-                        "'Год издания книги' = ? WHERE isbn = ?",
+        template.update("UPDATE book SET book_name = ?, book_author = ?, book_year = ? WHERE isbn = ?",
 book.getBookName(), book.getBookAuthor(), book.getBookYear(), book.getIsbn());
 //        Session session = sessionFactory.getCurrentSession();
 //        session.update(bookName, bookAuthor);
@@ -55,7 +46,6 @@ book.getBookName(), book.getBookAuthor(), book.getBookYear(), book.getIsbn());
 //        query.executeUpdate();
 //    }
     @Override
-
     public Book getBookByIsbn(String isbn) {
         return template.query("SELECT * FROM book WHERE isbn = ?",
                 new Object[] {isbn},
@@ -65,7 +55,7 @@ book.getBookName(), book.getBookAuthor(), book.getBookYear(), book.getIsbn());
 //        return session.get(Book.class, isbn);    }
 @Override
     public List<Book> getBook() {
-        return template.query("SELECT * FROM book", new BeanPropertyRowMapper<>(Book.class));
+        return template.query("SELECT * FROM book", new BookRowService());
 //        Session session = sessionFactory.getCurrentSession();
 //        return session.createQuery("From Book").list();
     }

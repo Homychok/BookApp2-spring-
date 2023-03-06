@@ -38,7 +38,7 @@ public class RestControllerNew {
     public String deleteBook(@RequestParam String isbn) {
 
         bookService.deleteBookByIsbn(isbn);
-        return "Boor with isbn = " + isbn + " was deleted";
+        return "Book with isbn = " + isbn + " was deleted";
 
     }
 }
