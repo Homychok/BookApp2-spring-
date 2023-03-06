@@ -6,17 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Objects;
-@Entity
-@Table(name = "book")
+
 public class Book {
-    @Id
+
     private String isbn;
-    @Column(name = "Название книги")
     private String bookName;
-    @Column(name = "Автор книги")
 
     private String bookAuthor;
-    @Column(name = "Год издания книги")
 
     private Integer bookYear;
 
