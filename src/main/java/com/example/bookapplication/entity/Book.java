@@ -1,11 +1,23 @@
 package com.example.bookapplication.entity;
 
-import java.util.Objects;
+import org.springframework.data.relational.core.mapping.Table;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Objects;
+@Entity
+@Table(name = "book")
 public class Book {
+    @Id
     private String isbn;
+    @Column(name = "Название книги")
     private String bookName;
+    @Column(name = "Автор книги")
+
     private String bookAuthor;
+    @Column(name = "Год издания книги")
+
     private Integer bookYear;
 
     public Book() {
@@ -71,27 +83,6 @@ public class Book {
         this.bookYear = bookYear;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book)) return false;
-        Book book = (Book) o;
-        return getIsbn() == book.getIsbn() && getBookYear() == book.getBookYear() && Objects.equals(getBookName(), book.getBookName()) && Objects.equals(getBookAuthor(), book.getBookAuthor());
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getIsbn(), getBookName(), getBookAuthor(), getBookYear());
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "isbn=" + isbn +
-                ", bookName='" + bookName + '\'' +
-                ", bookAuthor='" + bookAuthor + '\'' +
-                ", bookYear=" + bookYear +
-                '}';
-    }
 }
 
