@@ -1,12 +1,5 @@
 package com.example.bookapplication.entity;
 
-import org.springframework.data.relational.core.mapping.Table;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Objects;
-
 public class Book {
 
     private String isbn;

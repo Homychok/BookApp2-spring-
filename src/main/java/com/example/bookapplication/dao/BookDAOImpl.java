@@ -1,6 +1,7 @@
 package com.example.bookapplication.dao;
 
 import com.example.bookapplication.entity.Book;
+import com.example.bookapplication.service.BookRowService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,8 +24,7 @@ public class BookDAOImpl implements BookDAO {
     }
     @Override
     public void updateBook(Book book) {
-        template.update("UPDATE book SET 'Название книги' = ?, 'Автор книги' = ?, " +
-                        "'Год издания книги' = ? WHERE isbn = ?",
+        template.update("UPDATE book SET book_name = ?, book_author = ?, book_year = ? WHERE isbn = ?",
 book.getBookName(), book.getBookAuthor(), book.getBookYear(), book.getIsbn());
 //        Session session = sessionFactory.getCurrentSession();
 //        session.update(bookName, bookAuthor);
@@ -55,7 +55,7 @@ book.getBookName(), book.getBookAuthor(), book.getBookYear(), book.getIsbn());
 //        return session.get(Book.class, isbn);    }
 @Override
     public List<Book> getBook() {
-        return template.query("SELECT * FROM book", new BeanPropertyRowMapper<>(Book.class));
+        return template.query("SELECT * FROM book", new BookRowService());
 //        Session session = sessionFactory.getCurrentSession();
 //        return session.createQuery("From Book").list();
     }
